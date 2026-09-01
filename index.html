@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>秋招投递记录</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍂</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@latest/chinese-simplified-400-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@latest/chinese-simplified-500-normal.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@latest/chinese-simplified-700-normal.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+[hidden]{display:none!important}
+:root{
+  --bg:#f7f3ec;--card:#fffdf9;--line:#e7e0d2;--line2:#f0eadd;
+  --ink:#26211a;--sub:#8d8371;--faint:#b3a892;
+  --accent:#e8590c;--accent-dark:#c2410c;--accent-soft:#fdeee1;
+  --red:#dc2626;--shadow:0 1px 2px rgba(80,60,20,.04),0 10px 30px -18px rgba(80,60,20,.25);
+  --r:14px;
+}
+html{-webkit-font-smoothing:antialiased}
+body{font-family:'Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;font-size:14px;line-height:1.6}
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(1000px 500px at 92% -10%,rgba(232,89,12,.08),transparent 60%),radial-gradient(800px 420px at -10% -10%,rgba(217,119,6,.06),transparent 60%)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 20px;position:relative;z-index:1}
+.spacer{flex:1}
+.muted{color:var(--faint)}
+
+/* ---------- 顶栏 ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar .wrap{display:flex;align-items:center;gap:10px;height:64px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px}
+.logo-badge{width:36px;height:36px;border-radius:11px;background:linear-gradient(135deg,#f59e0b,#ea580c);display:grid;place-items:center;font-size:19px;box-shadow:0 4px 12px -4px rgba(234,88,12,.55)}
+.logo small{display:block;font-weight:400;font-size:11px;color:var(--sub);line-height:1.25}
+
+/* ---------- 按钮 ---------- */
+.btn{display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;font:inherit;font-weight:500;border-radius:10px;padding:8px 14px;transition:.18s;white-space:nowrap;color:var(--ink)}
+.btn-primary{background:linear-gradient(135deg,#f97316,#ea580c);color:#fff;box-shadow:0 4px 14px -6px rgba(234,88,12,.65)}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 7px 18px -6px rgba(234,88,12,.7)}
+.btn-ghost{background:transparent;border:1px solid var(--line)}
+.btn-ghost:hover{background:#fff;border-color:#d5cbb8}
+.btn-danger{background:var(--red);color:#fff}
+.btn-danger:hover{background:#b91c1c}
+.icon-btn{width:30px;height:30px;display:inline-grid;place-items:center;border:none;background:transparent;border-radius:8px;color:var(--sub);cursor:pointer;transition:.15s;flex:none}
+.icon-btn:hover{background:var(--accent-soft);color:var(--accent)}
+.icon-btn.danger:hover{background:#fee2e2;color:var(--red)}
+.icon-btn:disabled{opacity:.28;cursor:default}
+.icon-btn:disabled:hover{background:transparent;color:var(--sub)}
+.link-btn{background:none;border:none;color:var(--accent);cursor:pointer;font:inherit;font-size:12.5px;text-decoration:underline dotted;padding:0}
+.mini-btn{display:inline-flex;align-items:center;gap:3px;margin-left:6px;border:1px solid var(--line);background:#fff;border-radius:6px;font:inherit;font-size:11px;padding:1px 7px;cursor:pointer;color:var(--sub);vertical-align:1px}
+.mini-btn:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ---------- 统计卡片 ---------- */
+.stats{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin:22px 0 16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;gap:12px;align-items:center;box-shadow:var(--shadow)}
+.stat-ic{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none}
+.stat-num{font-size:22px;font-weight:700;line-height:1.25;font-variant-numeric:tabular-nums}
+.stat-label{font-size:12px;color:var(--sub)}
+@media(max-width:920px){.stats{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:540px){.stats{grid-template-columns:repeat(2,1fr);gap:8px}.stat{padding:10px 12px}}
+
+/* ---------- 工具栏 ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.search{position:relative;flex:1;min-width:210px;max-width:340px}
+.search>svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint);pointer-events:none}
+.search input{width:100%;padding:9px 12px 9px 34px;border:1px solid var(--line);border-radius:10px;background:#fff;font:inherit;outline:none;transition:.15s;color:var(--ink)}
+.search input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,89,12,.12)}
+select.ctl{appearance:none;-webkit-appearance:none;padding:9px 30px 9px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;outline:none;cursor:pointer;color:var(--ink);background-color:#fff;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238d8371' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;background-size:12px;transition:.15s}
+select.ctl:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,89,12,.12)}
+.count-text{font-size:12px;color:var(--sub);display:inline-flex;align-items:center;gap:8px}
+.collapse-btn{padding:6px 10px;font-size:12px}
+.collapse-btn:disabled{opacity:.42;cursor:not-allowed;background:transparent}
+.seg{display:inline-flex;background:#efe8da;border-radius:10px;padding:3px;gap:2px}
+.seg button{border:none;background:transparent;font:inherit;font-weight:500;padding:6px 13px;border-radius:8px;cursor:pointer;color:var(--sub);display:inline-flex;gap:6px;align-items:center;transition:.15s}
+.seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 4px rgba(80,60,20,.16)}
+
+/* ---------- 状态筛选 chips ---------- */
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px;margin-bottom:6px;scrollbar-width:thin}
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);background:#fff;cursor:pointer;font:inherit;font-size:13px;color:var(--sub);transition:.15s}
+.chip b{font-weight:600;font-size:12px;opacity:.8}
+.chip:hover{border-color:#d5cbb8;color:var(--ink)}
+.chip.on{background:#2b2118;color:#fff;border-color:#2b2118}
+.chip.on b{opacity:.7}
+.dot{width:7px;height:7px;border-radius:99px;background:var(--c,#a8a29e);flex:none}
+
+/* ---------- 状态色板 ---------- */
+.st-wait{--c:#64748b;--cbg:#f1f5f9}
+.st-sent{--c:#2563eb;--cbg:#eff6ff}
+.st-screening{--c:#0284c7;--cbg:#f0f9ff}
+.st-exam{--c:#4f46e5;--cbg:#eef2ff}
+.st-assess{--c:#0891b2;--cbg:#ecfeff}
+.st-r1{--c:#7c3aed;--cbg:#f5f3ff}
+.st-r2{--c:#9333ea;--cbg:#faf5ff}
+.st-r3{--c:#c026d3;--cbg:#fdf4ff}
+.st-r4{--c:#db2777;--cbg:#fdf2f8}
+.st-r5{--c:#e11d48;--cbg:#fff1f2}
+.st-hr{--c:#0d9488;--cbg:#f0fdfa}
+.st-offer{--c:#16a34a;--cbg:#f0fdf4}
+.st-pool{--c:#d97706;--cbg:#fffbeb}
+.st-fail{--c:#dc2626;--cbg:#fef2f2}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:2px 10px;border-radius:999px;font-size:12px;font-weight:500;background:var(--cbg);color:var(--c);white-space:nowrap}
+.badge .dot{background:var(--c)}
+.tag{display:inline-block;padding:2px 9px;border-radius:999px;background:#f3eee2;color:#7a6a4f;font-size:12px;font-weight:500;white-space:nowrap}
+
+/* ---------- 表格 ---------- */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;margin-bottom:10px}
+.table-scroll{overflow:auto;max-height:min(72vh,760px)}
+table{width:100%;border-collapse:collapse;min-width:2200px}
+thead th{position:sticky;top:0;z-index:4;background:#fbf8f0;text-align:left;font-size:12px;font-weight:600;color:var(--sub);padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:11px 12px;border-bottom:1px solid var(--line2);vertical-align:middle}
+tbody tr.main-row{transition:background .15s}
+tbody tr.main-row:hover{background:#fdf9f0}
+tbody tr:last-child td{border-bottom:none}
+.nowrap{white-space:nowrap;font-size:13px;font-variant-numeric:tabular-nums}
+.co{font-weight:600;font-size:14px;display:flex;align-items:center;gap:6px}
+.pos{font-size:12px;color:var(--sub);margin-top:1px}
+.stale{color:#d97706;display:inline-grid;place-items:center;cursor:help}
+.stale svg{width:13px;height:13px}
+.status-select{appearance:none;-webkit-appearance:none;font:inherit;font-size:12px;font-weight:600;color:var(--c);background-color:var(--cbg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238d8371' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;background-size:10px;border:1px solid transparent;border-radius:999px;padding:4px 26px 4px 12px;cursor:pointer;outline:none;transition:.15s}
+.status-select:hover{border-color:var(--c)}
+.status-select option{color:var(--ink);background:#fff}
+.pr{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--sub);white-space:nowrap}
+.pr i{width:7px;height:7px;border-radius:99px;display:inline-block}
+.pr-high i{background:#ef4444}.pr-mid i{background:#f59e0b}.pr-low i{background:#cbd5e1}
+.ops{display:flex;gap:2px}
+.exp svg{transition:transform .18s}
+.exp.open svg{transform:rotate(180deg)}
+.detail-row td{background:#fbf7ee;padding:0;border-bottom:1px solid var(--line2)}
+.detail-inner{padding:14px 16px 16px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px 24px;animation:fadeIn .2s}
+.d-item{min-width:0}
+.d-item.note-item{grid-column:1/-1}
+.d-label{font-size:11px;color:var(--faint);display:block;margin-bottom:2px}
+.d-val{font-size:13px;word-break:break-all}
+.d-val.empty{color:var(--faint)}
+.d-link{color:var(--accent-dark);text-decoration:none;border-bottom:1px dashed rgba(194,65,12,.45);display:inline-block;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom}
+.d-link:hover{border-bottom-style:solid}
+.table-company{min-width:180px}
+.table-position{min-width:240px;max-width:320px;font-weight:600;line-height:1.5}
+.table-link-cell{min-width:250px;max-width:340px;word-break:break-all;font-size:12px}
+.table-note{min-width:300px;max-width:420px;white-space:pre-wrap;word-break:break-word;font-size:12px;color:#5c5344}
+.table-ref{min-width:160px;font-size:12px}
+.table-record-time{min-width:190px;font-size:11.5px;color:var(--sub);white-space:nowrap}
+.table-sub{display:block;color:var(--sub);font-size:11.5px;margin-top:2px;font-weight:400}
+.no-match{text-align:center;padding:44px 20px!important;color:var(--sub)}
+
+/* ---------- 公司分组 ---------- */
+.company-groups{display:grid;gap:10px;margin-bottom:10px}
+.company-card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.company-head{width:100%;display:grid;grid-template-columns:minmax(280px,1fr) auto auto;align-items:center;gap:18px;padding:15px 18px;border:0;background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer;transition:.15s}
+.company-head:hover{background:#fdf9f0}
+.company-main{display:flex;align-items:center;gap:12px;min-width:0}
+.company-avatar{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex:none;background:linear-gradient(135deg,#fff1df,#fbd6b1);color:var(--accent-dark);font-size:17px;font-weight:700}
+.company-title{display:flex;align-items:center;gap:8px;min-width:0}
+.company-title strong{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.company-count-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent-dark);font-size:11px;font-weight:600;white-space:nowrap}
+.company-sub{font-size:12px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.company-metrics{display:flex;gap:7px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.company-metric{display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border:1px solid var(--line2);border-radius:999px;background:#fff;font-size:11.5px;color:var(--sub);white-space:nowrap}
+.company-metric i{width:6px;height:6px;border-radius:99px;background:var(--mc);display:block}
+.company-tail{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:12px;white-space:nowrap}
+.company-arrow{display:grid;place-items:center}
+.company-arrow svg{transition:transform .18s}
+.company-card.open .company-arrow svg{transform:rotate(180deg)}
+.company-records{border-top:1px solid var(--line2);background:#fbf8f1;animation:fadeIn .18s}
+.company-record{display:grid;grid-template-columns:minmax(260px,1fr) auto auto auto;align-items:center;gap:14px;padding:12px 18px 12px 70px;border-bottom:1px solid var(--line2)}
+.company-record:last-child{border-bottom:0}
+.company-position{font-size:13px;font-weight:600}
+.company-record-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--sub);font-size:11.5px;margin-top:2px}
+.company-record-meta span+span::before{content:'·';margin-right:8px;color:var(--faint)}
+.company-empty{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);text-align:center;padding:44px 20px;color:var(--sub)}
+@media(max-width:760px){
+  .company-head{grid-template-columns:minmax(0,1fr) auto;padding:13px 14px}.company-metrics{display:none}
+  .company-record{grid-template-columns:minmax(0,1fr) auto;padding:12px 14px 12px 30px}.company-record>.pr,.company-record>.status-select{justify-self:start}.company-record .ops{grid-column:2;grid-row:1/3}
+}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ---------- 时间线 ---------- */
+.timeline{padding:24px 26px}
+.tl-group{position:relative;padding-left:28px}
+.tl-group::before{content:'';position:absolute;left:7px;top:10px;bottom:14px;width:2px;background:var(--line)}
+.tl-group:last-child::before{bottom:auto;height:14px}
+.tl-date{font-weight:700;font-size:13.5px;margin-bottom:12px;position:relative;display:flex;align-items:baseline;gap:4px}
+.tl-date::before{content:'';position:absolute;left:-25px;top:50%;transform:translateY(-50%);width:10px;height:10px;border-radius:99px;background:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.tl-date .sub{font-weight:400;color:var(--sub);font-size:12px;margin-left:6px}
+.tl-item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;transition:.16s}
+.tl-item:hover{box-shadow:var(--shadow);transform:translateY(-1px)}
+.tl-body{flex:1;min-width:180px}
+.tl-title{font-weight:600}
+.tl-sub{font-size:12px;color:var(--sub)}
+.tl-ops{display:flex;gap:2px}
+
+/* ---------- 空状态 ---------- */
+.empty{padding:66px 20px;text-align:center}
+.empty .leaf{font-size:52px}
+.empty h3{margin:12px 0 6px;font-size:17px}
+.empty p{color:var(--sub);margin-bottom:20px;font-size:13px}
+.empty .btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* ---------- 弹窗 ---------- */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:flex-start;justify-content:center;padding:5vh 16px;background:rgba(38,30,18,.45);backdrop-filter:blur(3px);overflow:auto}
+.modal.show{display:flex}
+.modal-card{background:#fff;border-radius:18px;width:100%;max-width:660px;box-shadow:0 24px 60px -20px rgba(0,0,0,.35);animation:pop .22s cubic-bezier(.2,.9,.3,1.15)}
+@keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line2)}
+.modal-head h3{font-size:16px}
+.modal-body{padding:20px 22px}
+.modal-foot{padding:6px 22px 22px;display:flex;justify-content:flex-end;gap:10px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field.full{grid-column:1/-1}
+.field label{font-size:12px;font-weight:600;color:#5c5344}
+.field label i{color:var(--red);font-style:normal}
+.field input,.field select,.field textarea{font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;outline:none;background:#fffdfa;transition:.15s;width:100%;color:var(--ink)}
+.field textarea{resize:vertical;min-height:72px}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(232,89,12,.12);background:#fff}
+.field .err{border-color:var(--red)!important;box-shadow:0 0 0 3px rgba(220,38,38,.12)!important}
+.hint{font-size:11.5px;color:var(--faint);align-self:center}
+@media(max-width:600px){.form-grid{grid-template-columns:1fr}}
+
+/* ---------- 导出菜单 ---------- */
+.menu-wrap{position:relative}
+.menu{position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:6px;min-width:176px;z-index:60}
+.menu[hidden]{display:none}
+.menu button{display:flex;width:100%;gap:8px;align-items:center;border:none;background:none;font:inherit;font-size:13px;padding:8px 10px;border-radius:8px;cursor:pointer;color:var(--ink)}
+.menu button:hover{background:#f6f1e6}
+
+/* ---------- 云同步 ---------- */
+.cloud-btn{position:relative}
+.cloud-dot{width:8px;height:8px;border-radius:99px;background:#94a3b8;box-shadow:0 0 0 3px rgba(148,163,184,.14)}
+.cloud-dot.online{background:#16a34a;box-shadow:0 0 0 3px rgba(22,163,74,.14)}
+.cloud-dot.syncing{background:#2563eb;box-shadow:0 0 0 3px rgba(37,99,235,.14);animation:pulse 1s infinite}
+.cloud-dot.error{background:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.14)}
+.cloud-setup{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:13px 14px;color:#475569;font-size:12.5px;margin-bottom:16px}
+.cloud-setup ol{padding-left:20px;margin:6px 0}.cloud-setup code{font-size:11.5px;color:#c2410c}
+.cloud-status-box{display:flex;align-items:center;justify-content:space-between;gap:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;margin-top:14px}
+.cloud-user{font-weight:600}.cloud-status-text{font-size:12px;color:var(--sub);margin-top:2px}
+.cloud-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.cloud-divider{height:1px;background:var(--line2);margin:18px 0}
+.cloud-security{font-size:11.5px;color:var(--faint);margin-top:10px}
+@keyframes pulse{50%{opacity:.38}}
+
+/* ---------- Toast ---------- */
+#toasts{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);z-index:200;display:flex;flex-direction:column;align-items:center;gap:8px}
+.toast{background:#2b2118;color:#fff;padding:9px 18px;border-radius:999px;font-size:13px;box-shadow:0 10px 30px -8px rgba(0,0,0,.4);animation:toastIn .25s;display:flex;gap:7px;align-items:center;white-space:nowrap}
+.toast.out{animation:toastOut .3s forwards}
+@keyframes toastIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateY(8px)}}
+
+.foot{text-align:center;color:var(--faint);font-size:12px;padding:22px 0 40px}
+@media(max-width:520px){
+  .logo small{display:none}
+  .btn{padding:8px 10px;font-size:13px}
+  .topbar .wrap{gap:6px}
+  .timeline{padding:18px 14px}
+}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="logo">
+      <span class="logo-badge">🍂</span>
+      <span>秋招投递记录<small>把每一次投递都记清楚</small></span>
+    </div>
+    <div class="spacer"></div>
+    <button class="btn btn-ghost cloud-btn" id="cloudBtn" title="配置 Supabase 云同步">
+      <span class="cloud-dot" id="cloudDot"></span>
+      <span id="cloudBtnText">本地模式</span>
+    </button>
+    <button class="btn btn-ghost" id="importBtn" title="导入 JSON 备份">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+      导入
+    </button>
+    <div class="menu-wrap">
+      <button class="btn btn-ghost" id="exportBtn">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        导出
+        <svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="menu" id="exportMenu" hidden>
+        <button data-export="json">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          导出 JSON（完整备份）
+        </button>
+        <button data-export="csv">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+          导出 CSV（Excel 可打开）
+        </button>
+      </div>
+    </div>
+    <button class="btn btn-primary" id="addBtn">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      新增投递
+    </button>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="stats" id="stats"></section>
+
+  <section class="toolbar" id="toolbar">
+    <div class="search">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input id="searchInput" type="text" placeholder="搜索公司 / 岗位 / 备注 / 内推人…">
+    </div>
+    <select class="ctl" id="channelSel" title="按渠道筛选"></select>
+    <select class="ctl" id="sortSel" title="排序">
+      <option value="apply-desc">投递日期 · 新 → 旧</option>
+      <option value="apply-asc">投递日期 · 旧 → 新</option>
+      <option value="update-desc">最近更新</option>
+      <option value="create-desc">最新创建</option>
+      <option value="company">公司名排序</option>
+    </select>
+    <div class="spacer"></div>
+    <button class="btn btn-ghost collapse-btn" id="collapseCompaniesBtn" title="一键收起所有已展开的公司标签">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/><path d="m18 20-6-6-6 6"/></svg>
+      收起全部
+    </button>
+    <span class="count-text" id="countText"></span>
+    <div class="seg">
+      <button id="viewCompany" class="on">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/></svg>
+        公司
+      </button>
+      <button id="viewTable">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        表格
+      </button>
+      <button id="viewTimeline">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        时间线
+      </button>
+    </div>
+  </section>
+
+  <section class="chips" id="chips"></section>
+
+  <!-- 空状态 -->
+  <section class="panel" id="emptyPanel" hidden>
+    <div class="empty">
+      <div class="leaf">🍂</div>
+      <h3>还没有投递记录</h3>
+      <p>点击「新增投递」开始记录，或先载入示例数据看看效果</p>
+      <div class="btns">
+        <button class="btn btn-primary" id="emptyAddBtn">+ 新增第一条投递</button>
+        <button class="btn btn-ghost" id="sampleBtn">载入示例数据</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 公司分组视图 -->
+  <section class="company-groups" id="companyPanel"></section>
+
+  <!-- 表格视图 -->
+  <section class="panel" id="tablePanel" hidden>
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>公司 / 标签</th>
+            <th>岗位</th>
+            <th>渠道</th>
+            <th>投递日期</th>
+            <th>状态</th>
+            <th>面试时间</th>
+            <th>工作地点</th>
+            <th>内推人 / 内推码</th>
+            <th>薪资范围</th>
+            <th>优先级</th>
+            <th>投递链接</th>
+            <th>备注</th>
+            <th>记录时间</th>
+            <th style="width:90px">操作</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 时间线视图 -->
+  <section class="panel" id="timelinePanel" hidden>
+    <div class="timeline" id="timeline"></div>
+  </section>
+
+  <footer class="foot" id="storageHint">当前为本地模式 · 数据保存在浏览器 localStorage 中 · 建议定期导出备份 🍁</footer>
+</main>
+
+<!-- 新增 / 编辑弹窗 -->
+<div class="modal" id="recordModal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <h3 id="modalTitle">新增投递</h3>
+      <button class="icon-btn" id="modalClose" title="关闭">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <form id="recordForm">
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field"><label>公司 <i>*</i></label><input id="f-company" placeholder="如：字节跳动" maxlength="80"></div>
+          <div class="field"><label>岗位 <i>*</i></label><input id="f-position" placeholder="如：前端开发工程师" maxlength="60"></div>
+          <div class="field full"><label>公司标签（可选）</label><input id="f-company-group" placeholder="如：网易；相同标签的投递会收拢到一起" maxlength="40"></div>
+          <div class="field full"><label>投递链接</label><input id="f-link" placeholder="https://…（可一键复制）"></div>
+          <div class="field"><label>投递渠道</label><select id="f-channel"></select></div>
+          <div class="field"><label>投递日期</label><input id="f-date" type="date"></div>
+          <div class="field"><label>当前状态</label><select id="f-status"></select></div>
+          <div class="field"><label>面试时间</label><input id="f-interview" type="datetime-local"></div>
+          <div class="field"><label>内推人</label><input id="f-referrer" placeholder="选填" maxlength="30"></div>
+          <div class="field"><label>内推码</label><input id="f-code" placeholder="选填（可一键复制）" maxlength="50"></div>
+          <div class="field"><label>工作地点</label><input id="f-location" placeholder="如：上海" maxlength="30"></div>
+          <div class="field"><label>薪资范围</label><input id="f-salary" placeholder="如：20-35K·15薪" maxlength="30"></div>
+          <div class="field"><label>优先级</label>
+            <select id="f-priority"><option>高</option><option selected>中</option><option>低</option></select>
+          </div>
+          <div class="field"><label>&nbsp;</label><span class="hint">状态变化时会自动记录更新时间</span></div>
+          <div class="field full"><label>备注</label><textarea id="f-note" placeholder="面试进展、笔试题型、联系人、复盘……"></textarea></div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn btn-ghost" id="cancelBtn">取消</button>
+        <button type="submit" class="btn btn-primary">保存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 云同步配置 / 登录 -->
+<div class="modal" id="cloudModal">
+  <div class="modal-card" style="max-width:680px">
+    <div class="modal-head">
+      <h3>Supabase 云同步</h3>
+      <button class="icon-btn" id="cloudModalClose" title="关闭">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="cloud-setup">
+        <b>GitHub Pages 只负责托管页面，Supabase 负责持久化数据。</b>
+        <ol>
+          <li>创建 Supabase 项目，在 SQL Editor 执行同目录的 <code>offer-supabase-setup.sql</code></li>
+          <li>从 Project Settings → API 复制 Project URL 与 anon public key</li>
+          <li>保存配置后注册或登录；首次登录可把现有本地记录迁移到云端</li>
+        </ol>
+      </div>
+      <div class="form-grid">
+        <div class="field full"><label>Supabase Project URL</label><input id="cloudUrl" type="url" placeholder="https://xxxx.supabase.co" autocomplete="off"></div>
+        <div class="field full"><label>anon public key</label><input id="cloudAnonKey" type="password" placeholder="只填写 anon key，绝不要填写 service_role key" autocomplete="off"></div>
+      </div>
+      <div class="cloud-actions">
+        <button type="button" class="btn btn-primary" id="saveCloudConfigBtn">保存云端配置</button>
+        <a class="btn btn-ghost" href="./offer-supabase-setup.sql" target="_blank" rel="noopener">查看建表 SQL</a>
+      </div>
+      <div class="cloud-divider"></div>
+      <div id="cloudGuestPanel">
+        <div class="form-grid">
+          <div class="field"><label>登录邮箱</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="email"></div>
+          <div class="field"><label>密码</label><input id="cloudPassword" type="password" placeholder="至少 6 位" autocomplete="current-password"></div>
+        </div>
+        <div class="cloud-actions">
+          <button type="button" class="btn btn-primary" id="cloudSignInBtn">登录并同步</button>
+          <button type="button" class="btn btn-ghost" id="cloudSignUpBtn">注册账号</button>
+        </div>
+      </div>
+      <div id="cloudUserPanel" hidden>
+        <div class="cloud-status-box">
+          <div><div class="cloud-user" id="cloudUserEmail"></div><div class="cloud-status-text" id="cloudSyncStatus">等待同步</div></div>
+          <span class="badge st-offer"><span class="dot"></span>已登录</span>
+        </div>
+        <div class="cloud-actions">
+          <button type="button" class="btn btn-primary" id="syncNowBtn">立即同步</button>
+          <button type="button" class="btn btn-ghost" id="cloudSignOutBtn">退出云端账号</button>
+        </div>
+      </div>
+      <div class="cloud-security">anon key 可以出现在前端，但必须启用 RLS；service_role key 属于服务端机密，不能保存到本页面或 GitHub。</div>
+    </div>
+    <div class="modal-foot"><button type="button" class="btn btn-ghost" id="cloudDoneBtn">完成</button></div>
+  </div>
+</div>
+
+<!-- 确认弹窗 -->
+<div class="modal" id="confirmModal">
+  <div class="modal-card" style="max-width:400px">
+    <div class="modal-body" style="padding:28px 24px 8px;text-align:center">
+      <div style="font-size:36px" id="confirmEmoji">🗑️</div>
+      <h3 id="confirmTitle" style="margin:12px 0 6px;font-size:16px">确定删除？</h3>
+      <p id="confirmDesc" style="color:var(--sub);font-size:13px">此操作不可撤销</p>
+    </div>
+    <div class="modal-foot" style="justify-content:center;padding-bottom:24px">
+      <button class="btn btn-ghost" id="confirmCancel">取消</button>
+      <button class="btn btn-danger" id="confirmOk">确定</button>
+    </div>
+  </div>
+</div>
+
+<div id="toasts"></div>
+<input type="file" id="fileInput" accept=".json,application/json" hidden>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="./offer-cloud.js"></script>
+<script>
+/* ================= 常量 ================= */
+const LS_KEY='autumn_recruit_tracker_v1';
+const CLOUD_CONFIG_KEY='autumn_recruit_tracker_supabase_config';
+const CLOUD_CACHE_PREFIX='autumn_recruit_tracker_cloud_cache:';
+const CLOUD_DELETES_PREFIX='autumn_recruit_tracker_cloud_deletes:';
+const CLOUD_AUTH_STORAGE_KEY='autumn_recruit_tracker_supabase_auth';
+const STATUSES=['待投递','已投递','筛选中','测评中','笔试','一面','二面','三面','四面','五面','HR面','Offer','泡池','挂掉'];
+const TERMINAL=['Offer','挂掉'];
+const PROCESSING=['已投递','筛选中','测评中','笔试','一面','二面','三面','四面','五面','HR面'];
+const CHANNELS=['官网','BOSS直聘','牛客','猎聘','拉勾','智联招聘','实习僧','内推','校园宣讲会','其他'];
+const STATUS_CLS={'待投递':'st-wait','已投递':'st-sent','筛选中':'st-screening','测评中':'st-assess','笔试':'st-exam','一面':'st-r1','二面':'st-r2','三面':'st-r3','四面':'st-r4','五面':'st-r5','HR面':'st-hr','Offer':'st-offer','泡池':'st-pool','挂掉':'st-fail'};
+const STATUS_COLOR={'待投递':'#64748b','已投递':'#2563eb','筛选中':'#0284c7','测评中':'#0891b2','笔试':'#4f46e5','一面':'#7c3aed','二面':'#9333ea','三面':'#c026d3','四面':'#db2777','五面':'#e11d48','HR面':'#0d9488','Offer':'#16a34a','泡池':'#d97706','挂掉':'#dc2626'};
+const STALE_DAYS=14;
+
+/* ================= 图标 ================= */
+const svg=p=>`<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const I={
+  copy:svg('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>'),
+  edit:svg('<path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/>'),
+  trash:svg('<path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M10 11v6M14 11v6"/>'),
+  link:svg('<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>'),
+  tag:svg('<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/>'),
+  chev:svg('<path d="M6 9l6 6 6-6"/>'),
+  warn:svg('<path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/>'),
+  doc:svg('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>'),
+  activity:svg('<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>'),
+  award:svg('<circle cx="12" cy="8" r="6"/><path d="M15.5 13 17 22l-5-3-5 3 1.5-9"/>'),
+  clock:svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  xc:svg('<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>'),
+  trend:svg('<path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/>'),
+  building:svg('<path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1"/>'),
+};
+
+/* ================= 工具函数 ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const pad=n=>String(n).padStart(2,'0');
+function todayStr(){const d=new Date();return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;}
+function fmtMD(s){const p=String(s).split('-');if(p.length!==3)return esc(s);return `${+p[1]}月${+p[2]}日`;}
+function shortUrl(u){try{const x=new URL(u);return (x.hostname+x.pathname).replace(/\/$/,'');}catch(e){return u;}}
+function relTime(iso){
+  if(!iso)return '—';
+  const diff=Date.now()-new Date(iso).getTime();
+  if(isNaN(diff))return '—';
+  const m=Math.floor(diff/60000);
+  if(m<1)return '刚刚';
+  if(m<60)return m+' 分钟前';
+  const h=Math.floor(m/60);
+  if(h<24)return h+' 小时前';
+  const d=Math.floor(h/24);
+  if(d<30)return d+' 天前';
+  return iso.slice(0,10);
+}
+function dateLine(s){
+  const d=new Date(s+'T00:00:00');
+  if(isNaN(d))return esc(s);
+  const t=new Date();t.setHours(0,0,0,0);
+  const diff=Math.round((t-d)/864e5);
+  const rel=diff===0?'今天':diff===1?'昨天':diff===-1?'明天':diff>1?`${diff} 天前`:`${-diff} 天后`;
+  return `${d.getFullYear()} 年 ${d.getMonth()+1} 月 ${d.getDate()} 日 <span class="sub">周${'日一二三四五六'[d.getDay()]} · ${rel}</span>`;
+}
+function staleDays(r){
+  if(TERMINAL.includes(r.status)||r.status==='泡池')return 0;
+  const t=new Date(r.statusUpdatedAt||r.updatedAt||r.createdAt).getTime();
+  if(!t||isNaN(t))return 0;
+  return Math.floor((Date.now()-t)/864e5);
+}
+
+/* ================= 数据 ================= */
+function loadRecords(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    const arr=raw?JSON.parse(raw):[];
+    return Array.isArray(arr)?arr.map(normalizeRecord):[];
+  }catch(e){return [];}
+}
+function persist(sync=true){
+  try{
+    localStorage.setItem(activeRecordsKey(),JSON.stringify(records));
+    if(sync&&cloudUser)scheduleCloudSync();
+  }catch(e){toast('保存失败：本地存储已满或被禁用','error');}
+}
+function normalizeRecord(x){
+  const now=new Date().toISOString();
+  return {
+    id:String(x.id||uid()),
+    company:String(x.company||'未命名公司'),
+    companyGroup:String(x.companyGroup||''),
+    position:String(x.position||''),
+    link:String(x.link||''),
+    channel:String(x.channel||'其他'),
+    applyDate:String(x.applyDate||''),
+    status:STATUSES.includes(x.status)?x.status:'已投递',
+    interviewTime:String(x.interviewTime||''),
+    referrer:String(x.referrer||''),
+    referralCode:String(x.referralCode||''),
+    location:String(x.location||''),
+    salary:String(x.salary||''),
+    priority:['高','中','低'].includes(x.priority)?x.priority:'中',
+    note:String(x.note||''),
+    createdAt:x.createdAt?String(x.createdAt):now,
+    updatedAt:x.updatedAt?String(x.updatedAt):now,
+    statusUpdatedAt:x.statusUpdatedAt?String(x.statusUpdatedAt):now,
+  };
+}
+function sampleData(){
+  const day=n=>{const t=new Date(Date.now()-n*864e5);return `${t.getFullYear()}-${pad(t.getMonth()+1)}-${pad(t.getDate())}`;};
+  const iso=n=>new Date(Date.now()-n*864e5).toISOString();
+  const S=o=>{const {_d,_u,_s,...rest}=o;return normalizeRecord({createdAt:iso(_d),updatedAt:iso(_u??_d),statusUpdatedAt:iso(_s??_u??_d),...rest});};
+  return [
+    S({company:'小红书',position:'前端开发工程师（社区方向）',channel:'BOSS直聘',status:'Offer',applyDate:day(34),location:'上海',salary:'26-40K·15薪',priority:'高',link:'https://job.xiaohongshu.com/off-campus/position-detail/12345',note:'OC 了！薪资比预期高，等正式意向书。',_d:34,_u:2,_s:2}),
+    S({company:'字节跳动',position:'前端开发工程师',channel:'官网',status:'三面',applyDate:day(21),location:'上海',priority:'高',interviewTime:`${day(-2)}T14:00`,link:'https://jobs.bytedance.com/campus/position/72651234',note:'三面是交叉面，重点准备项目难点与手撕代码。',_d:21,_u:1,_s:1}),
+    S({company:'腾讯',position:'Web 前端开发',channel:'内推',status:'二面',applyDate:day(18),referrer:'王学长（微信联系）',referralCode:'TXCAMPUS8866',location:'深圳',priority:'高',link:'https://join.qq.com/post.html?query=1',note:'内推码可复用给同学。',_d:18,_u:3,_s:3}),
+    S({company:'美团',position:'前端开发工程师',channel:'牛客',status:'泡池',applyDate:day(27),location:'北京',link:'https://zhaopin.meituan.com/web/position/detail/67890',note:'二面通过后排序中，保持手机畅通。',_d:27,_u:9,_s:9}),
+    S({company:'阿里巴巴',position:'前端研发工程师（淘天）',channel:'官网',status:'笔试',applyDate:day(6),interviewTime:`${day(-1)}T19:00`,link:'https://talent.taobao.com/off-campus/position-detail?positionId=10001',note:'在线笔试，两道算法题 + 一道选择题。',_d:6,_u:1,_s:1}),
+    S({company:'快手',position:'前端开发工程师',channel:'校园宣讲会',status:'已投递',applyDate:day(3),location:'北京',note:'宣讲会现场投递，HR 说一周内反馈。',_d:3,_u:3,_s:3}),
+    S({company:'网易',position:'前端开发工程师',channel:'官网',status:'挂掉',applyDate:day(30),location:'杭州',link:'https://campus.163.com/position/detail/777',note:'一面挂：算法题没写出来，复盘后多刷动态规划。',_d:30,_u:12,_s:12}),
+    S({company:'米哈游',position:'Web 前端开发',channel:'官网',status:'待投递',priority:'高',link:'https://careers.mihoyo.com/m/?positionId=8888',note:'等内推码，岗位 JD 已收藏。',_d:0,_u:0,_s:0}),
+  ];
+}
+
+let records=loadRecords();
+let editingId=null;
+const expandedCompanies=new Set();
+let confirmCb=null;
+const ui={search:'',status:'全部',channel:'全部',sort:'apply-desc',view:'company'};
+
+/* ================= 筛选 / 排序 ================= */
+const matchSearch=r=>{
+  const q=ui.search.trim().toLowerCase();
+  if(!q)return true;
+  return [r.company,recordCompanyGroup(r),r.position,r.note,r.referrer,r.channel].join(' ').toLowerCase().includes(q);
+};
+const matchChannel=r=>ui.channel==='全部'||r.channel===ui.channel;
+const sorters={
+  'apply-desc':(a,b)=>(b.applyDate||'').localeCompare(a.applyDate||'')||b.createdAt.localeCompare(a.createdAt),
+  'apply-asc':(a,b)=>(a.applyDate||'9999-99').localeCompare(b.applyDate||'9999-99'),
+  'update-desc':(a,b)=>b.updatedAt.localeCompare(a.updatedAt),
+  'create-desc':(a,b)=>b.createdAt.localeCompare(a.createdAt),
+  'company':(a,b)=>a.company.localeCompare(b.company,'zh-Hans-CN'),
+};
+function getFiltered(){
+  const list=records.filter(r=>matchChannel(r)&&matchSearch(r)&&(ui.status==='全部'||r.status===ui.status));
+  return [...list].sort(sorters[ui.sort]||sorters['apply-desc']);
+}
+
+/* ================= 渲染 ================= */
+function renderAll(){renderStats();renderChannelFilter();renderChips();renderList();}
+
+function inferCompanyGroup(name){
+  const clean=String(name||'').trim();
+  if(/^网易游戏(?:互娱|雷火)/.test(clean))return '网易';
+  return clean.replace(/[（(][^）)]*[）)]\s*$/,'').trim()||'未命名公司';
+}
+function recordCompanyGroup(r){return String(r.companyGroup||'').trim()||inferCompanyGroup(r.company);}
+function companyKey(name){return String(name||'').trim().toLocaleLowerCase('zh-CN');}
+function companyCount(list,appliedOnly=false){
+  return new Set(list.filter(r=>!appliedOnly||r.status!=='待投递').map(r=>companyKey(recordCompanyGroup(r))).filter(Boolean)).size;
+}
+function groupCompanies(list){
+  const groups=new Map();
+  list.forEach(r=>{
+    const name=recordCompanyGroup(r);
+    const key=companyKey(name);
+    if(!groups.has(key))groups.set(key,{key,name,items:[]});
+    groups.get(key).items.push(r);
+  });
+  return [...groups.values()];
+}
+
+function renderStats(){
+  const total=records.length;
+  const companies=companyCount(records,true);
+  const offer=records.filter(r=>r.status==='Offer').length;
+  const pool=records.filter(r=>r.status==='泡池').length;
+  const fail=records.filter(r=>r.status==='挂掉').length;
+  const proc=records.filter(r=>PROCESSING.includes(r.status)).length;
+  const denom=records.filter(r=>r.status!=='待投递').length;
+  const rate=denom?Math.round(offer/denom*100):0;
+  const items=[
+    {label:'总投递',val:total,ic:I.doc,c:'#e8590c',bg:'#fdeee1'},
+    {label:'投递公司',val:companies,ic:I.building,c:'#0f766e',bg:'#f0fdfa'},
+    {label:'流程中',val:proc,ic:I.activity,c:'#2563eb',bg:'#eff6ff'},
+    {label:'Offer',val:offer,ic:I.award,c:'#16a34a',bg:'#f0fdf4'},
+    {label:'泡池中',val:pool,ic:I.clock,c:'#d97706',bg:'#fffbeb'},
+    {label:'已挂掉',val:fail,ic:I.xc,c:'#dc2626',bg:'#fef2f2'},
+    {label:'Offer 率',val:rate+'%',ic:I.trend,c:'#7c3aed',bg:'#f5f3ff'},
+  ];
+  $('#stats').innerHTML=items.map(x=>`<div class="stat"><div class="stat-ic" style="color:${x.c};background:${x.bg}">${x.ic}</div><div><div class="stat-num">${esc(String(x.val))}</div><div class="stat-label">${x.label}</div></div></div>`).join('');
+}
+
+function renderChannelFilter(){
+  const used=[...new Set([...CHANNELS,...records.map(r=>r.channel).filter(Boolean)])];
+  if(ui.channel!=='全部'&&!used.includes(ui.channel))ui.channel='全部';
+  $('#channelSel').innerHTML=`<option value="全部">全部渠道</option>`+used.map(c=>`<option value="${esc(c)}" ${ui.channel===c?'selected':''}>${esc(c)}</option>`).join('');
+}
+
+function renderChips(){
+  const base=records.filter(r=>matchSearch(r)&&matchChannel(r));
+  let html=`<button class="chip ${ui.status==='全部'?'on':''}" data-status="全部">全部 <b>${base.length}</b></button>`;
+  STATUSES.forEach(s=>{
+    const n=base.filter(r=>r.status===s).length;
+    html+=`<button class="chip ${ui.status===s?'on':''}" data-status="${s}" style="--c:${STATUS_COLOR[s]}"><span class="dot"></span>${s} <b>${n}</b></button>`;
+  });
+  $('#chips').innerHTML=html;
+}
+
+function prHTML(p){
+  if(!p)return '<span class="muted">—</span>';
+  const k=p==='高'?'high':p==='中'?'mid':'low';
+  return `<span class="pr pr-${k}"><i></i>${esc(p)}</span>`;
+}
+
+function rowHTML(r){
+  const stale=staleDays(r);
+  const stCls=STATUS_CLS[r.status]||'st-sent';
+  const opts=STATUSES.map(s=>`<option ${s===r.status?'selected':''}>${s}</option>`).join('');
+  const group=recordCompanyGroup(r);
+  const groupLabel=companyKey(group)!==companyKey(r.company)?`<span class="table-sub">标签：${esc(group)}</span>`:'';
+  const interview=r.interviewTime?esc(r.interviewTime.replace('T',' ')):'<span class="muted">—</span>';
+  const referral=[r.referrer?esc(r.referrer):'',r.referralCode?`<b>${esc(r.referralCode)}</b><button class="mini-btn" data-action="copy-code" data-id="${r.id}">${I.copy}复制</button>`:''].filter(Boolean).join('<br>')||'<span class="muted">—</span>';
+  const link=r.link?`<a class="d-link" href="${esc(r.link)}" target="_blank" rel="noopener">${esc(r.link)}</a><button class="mini-btn" data-action="copy-link" data-id="${r.id}">${I.copy}复制</button>`:'<span class="muted">—</span>';
+  const created=r.createdAt?esc(r.createdAt.replace('T',' ').slice(0,19)):'—';
+  const updated=r.updatedAt?esc(r.updatedAt.replace('T',' ').slice(0,19)):'—';
+  return `<tr class="main-row">
+    <td class="table-company"><div class="co">${esc(r.company)}${stale>=STALE_DAYS?`<span class="stale" title="状态已 ${stale} 天未更新，可以主动 follow 一下">${I.warn}</span>`:''}</div>${groupLabel}</td>
+    <td class="table-position">${esc(r.position)}</td>
+    <td><span class="tag">${esc(r.channel||'—')}</span></td>
+    <td class="nowrap" title="${esc(r.applyDate||'')}">${r.applyDate?fmtMD(r.applyDate):'<span class="muted">—</span>'}</td>
+    <td><select class="status-select ${stCls}" data-action="status" data-id="${r.id}" title="点击修改状态">${opts}</select></td>
+    <td class="nowrap">${interview}</td>
+    <td>${r.location?esc(r.location):'<span class="muted">—</span>'}</td>
+    <td class="table-ref">${referral}</td>
+    <td>${r.salary?esc(r.salary):'<span class="muted">—</span>'}</td>
+    <td>${prHTML(r.priority)}</td>
+    <td class="table-link-cell">${link}</td>
+    <td class="table-note">${r.note?esc(r.note):'<span class="muted">—</span>'}</td>
+    <td class="table-record-time">创建：${created}<br>更新：${updated}</td>
+    <td><div class="ops">
+      <button class="icon-btn" data-action="edit" data-id="${r.id}" title="编辑">${I.edit}</button>
+      <button class="icon-btn danger" data-action="del" data-id="${r.id}" title="删除">${I.trash}</button>
+    </div></td>
+  </tr>`;
+}
+
+function companyRecordHTML(r,groupName){
+  const stCls=STATUS_CLS[r.status]||'st-sent';
+  const opts=STATUSES.map(s=>`<option ${s===r.status?'selected':''}>${s}</option>`).join('');
+  const sourceCompany=companyKey(r.company)!==companyKey(groupName)?r.company:'';
+  const meta=[sourceCompany,r.applyDate?fmtMD(r.applyDate):'未填写日期',r.channel||'',r.location||''].filter(Boolean);
+  return `<div class="company-record">
+    <div>
+      <div class="company-position">${esc(r.position)}</div>
+      <div class="company-record-meta">${meta.map(x=>`<span>${esc(x)}</span>`).join('')}</div>
+    </div>
+    <select class="status-select ${stCls}" data-action="status" data-id="${r.id}" title="点击修改状态">${opts}</select>
+    ${prHTML(r.priority)}
+    <div class="ops">
+      <button class="icon-btn" data-action="copy-link" data-id="${r.id}" title="复制投递链接" ${r.link?'':'disabled'}>${I.link}</button>
+      <button class="icon-btn" data-action="edit" data-id="${r.id}" title="编辑">${I.edit}</button>
+      <button class="icon-btn danger" data-action="del" data-id="${r.id}" title="删除">${I.trash}</button>
+    </div>
+  </div>`;
+}
+
+function companyCardHTML(group){
+  const {key,name,items}=group;
+  const open=expandedCompanies.has(key);
+  const latest=items.map(r=>r.applyDate).filter(Boolean).sort().at(-1)||'';
+  const active=items.filter(r=>PROCESSING.includes(r.status)).length;
+  const offer=items.filter(r=>r.status==='Offer').length;
+  const pool=items.filter(r=>r.status==='泡池').length;
+  const fail=items.filter(r=>r.status==='挂掉').length;
+  const waiting=items.filter(r=>r.status==='待投递').length;
+  const metrics=[['流程中',active,'#2563eb'],['Offer',offer,'#16a34a'],['泡池',pool,'#d97706'],['挂掉',fail,'#dc2626'],['待投递',waiting,'#64748b']].filter(x=>x[1]);
+  const positions=items.slice(0,2).map(r=>r.position).join('、')+(items.length>2?` 等 ${items.length} 个岗位`:``);
+  return `<article class="company-card ${open?'open':''}">
+    <button class="company-head" data-action="company-toggle" data-company="${encodeURIComponent(key)}" aria-expanded="${open}">
+      <div class="company-main">
+        <span class="company-avatar">${esc(name.slice(0,1).toUpperCase())}</span>
+        <div style="min-width:0">
+          <div class="company-title"><strong>${esc(name)}</strong><span class="company-count-tag">${items.length} 次投递</span></div>
+          <div class="company-sub">${esc(positions)}</div>
+        </div>
+      </div>
+      <div class="company-metrics">${metrics.map(([label,count,color])=>`<span class="company-metric" style="--mc:${color}"><i></i>${label} ${count}</span>`).join('')}</div>
+      <div class="company-tail"><span>${latest?`最近 ${fmtMD(latest)}`:'待投递'}</span><span class="company-arrow">${I.chev}</span></div>
+    </button>
+    ${open?`<div class="company-records">${items.map(r=>companyRecordHTML(r,name)).join('')}</div>`:''}
+  </article>`;
+}
+
+function timelineHTML(list){
+  const groups=new Map();
+  list.forEach(r=>{const k=r.applyDate||'';if(!groups.has(k))groups.set(k,[]);groups.get(k).push(r);});
+  const keys=[...groups.keys()].sort((a,b)=>((!a)-(!b))||b.localeCompare(a));
+  return keys.map(k=>{
+    const items=groups.get(k);
+    return `<div class="tl-group">
+      <div class="tl-date">${k?dateLine(k):'未填写投递日期'}</div>
+      ${items.map(r=>`<div class="tl-item">
+        <span class="badge ${STATUS_CLS[r.status]||'st-sent'}"><span class="dot"></span>${esc(r.status)}</span>
+        <div class="tl-body">
+          <div class="tl-title">${esc(r.company)} <span class="muted">·</span> ${esc(r.position)}</div>
+          <div class="tl-sub">${esc(r.channel||'')}${r.location?' · '+esc(r.location):''}${r.interviewTime?' · 面试 '+esc(r.interviewTime.replace('T',' ')):''}</div>
+        </div>
+        <div class="tl-ops">
+          <button class="icon-btn" data-action="copy-link" data-id="${r.id}" title="复制投递链接" ${r.link?'':'disabled'}>${I.link}</button>
+          <button class="icon-btn" data-action="edit" data-id="${r.id}" title="编辑">${I.edit}</button>
+        </div>
+      </div>`).join('')}
+    </div>`;
+  }).join('');
+}
+
+function renderList(){
+  const list=getFiltered();
+  const hasAny=records.length>0;
+  const filterActive=ui.search.trim()!==''||ui.status!=='全部'||ui.channel!=='全部';
+
+  $('#emptyPanel').hidden=hasAny;
+  $('#chips').style.display=hasAny?'':'none';
+  $('#companyPanel').hidden=!hasAny||ui.view!=='company';
+  $('#tablePanel').hidden=!hasAny||ui.view!=='table';
+  $('#timelinePanel').hidden=!hasAny||ui.view!=='timeline';
+  const visibleCompanyKeys=new Set(groupCompanies(list).map(g=>g.key));
+  const hasExpandedVisible=[...expandedCompanies].some(key=>visibleCompanyKeys.has(key));
+  $('#collapseCompaniesBtn').hidden=!hasAny||ui.view!=='company';
+  $('#collapseCompaniesBtn').disabled=!hasExpandedVisible;
+
+  const visibleCompanies=companyCount(list);
+  const allCompanies=companyCount(records);
+  $('#countText').innerHTML=hasAny
+    ?(filterActive?`显示 ${list.length} 条投递 · ${visibleCompanies} 家公司 / 共 ${records.length} 条 <button class="link-btn" data-action="clear-filter">清除筛选</button>`:`共 ${records.length} 条投递 · ${allCompanies} 家公司`)
+    :'共 0 条记录';
+
+  if(!hasAny)return;
+
+  const noMatchCompany=`<div class="company-empty">没有符合筛选条件的记录　<button class="link-btn" data-action="clear-filter">清除筛选</button></div>`;
+  const noMatchTable=`<tr><td colspan="14" class="no-match">没有符合筛选条件的记录　<button class="link-btn" data-action="clear-filter">清除筛选</button></td></tr>`;
+  const noMatchTl=`<div class="empty" style="padding:44px 20px"><p style="margin-bottom:12px">没有符合筛选条件的记录</p><button class="link-btn" data-action="clear-filter">清除筛选</button></div>`;
+
+  if(ui.view==='company'){
+    $('#companyPanel').innerHTML=list.length?groupCompanies(list).map(companyCardHTML).join(''):noMatchCompany;
+  }else if(ui.view==='table'){
+    $('#tbody').innerHTML=list.length?list.map(rowHTML).join(''):noMatchTable;
+  }else{
+    $('#timeline').innerHTML=list.length?timelineHTML(list):noMatchTl;
+  }
+}
+
+/* ================= Toast ================= */
+function toast(msg,type='info'){
+  const icons={success:'✅',error:'⚠️',info:'🔔'};
+  const t=document.createElement('div');
+  t.className='toast';
+  t.innerHTML=`<span>${icons[type]||''}</span><span>${esc(msg)}</span>`;
+  $('#toasts').appendChild(t);
+  setTimeout(()=>{t.classList.add('out');t.addEventListener('animationend',()=>t.remove(),{once:true});},2200);
+}
+
+/* ================= 复制 ================= */
+async function copyText(text,label){
+  if(!text){toast('没有可复制的内容','error');return;}
+  try{
+    await navigator.clipboard.writeText(text);
+    toast(`${label}已复制`,'success');
+  }catch(e){
+    const ta=document.createElement('textarea');
+    ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');toast(`${label}已复制`,'success');}
+    catch(err){toast('复制失败，请手动复制','error');}
+    ta.remove();
+  }
+}
+
+/* ================= 弹窗 ================= */
+function openRecordModal(id){
+  editingId=id||null;
+  const r=id?records.find(x=>x.id===id):null;
+  $('#modalTitle').textContent=r?'编辑投递':'新增投递';
+  $('#f-company').value=r?.company||'';
+  $('#f-position').value=r?.position||'';
+  $('#f-company-group').value=r?.companyGroup||'';
+  $('#f-company-group').placeholder=r?`留空则自动归为：${inferCompanyGroup(r.company)}`:'如：网易；相同标签的投递会收拢到一起';
+  $('#f-link').value=r?.link||'';
+  $('#f-channel').value=r?.channel||'官网';
+  $('#f-date').value=r?r.applyDate:todayStr();
+  $('#f-status').value=r?.status||'已投递';
+  $('#f-interview').value=r?.interviewTime||'';
+  $('#f-referrer').value=r?.referrer||'';
+  $('#f-code').value=r?.referralCode||'';
+  $('#f-location').value=r?.location||'';
+  $('#f-salary').value=r?.salary||'';
+  $('#f-priority').value=r?.priority||'中';
+  $('#f-note').value=r?.note||'';
+  $('#f-company').classList.remove('err');
+  $('#f-position').classList.remove('err');
+  $('#recordModal').classList.add('show');
+  setTimeout(()=>$('#f-company').focus(),60);
+}
+function closeRecordModal(){$('#recordModal').classList.remove('show');editingId=null;}
+function askConfirm({emoji='⚠️',title,desc,okText='确定',onOk}){
+  $('#confirmEmoji').textContent=emoji;
+  $('#confirmTitle').textContent=title;
+  $('#confirmDesc').textContent=desc;
+  $('#confirmOk').textContent=okText;
+  confirmCb=onOk;
+  $('#confirmModal').classList.add('show');
+}
+function closeConfirm(){$('#confirmModal').classList.remove('show');confirmCb=null;}
+
+/* ================= 导入导出 ================= */
+function download(content,name,type){
+  const blob=new Blob([content],{type});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=name;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),500);
+}
+function dateStamp(){const d=new Date();return `${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;}
+function exportJSON(){
+  if(!records.length){toast('暂无数据可导出','error');return;}
+  download(JSON.stringify(records,null,2),`秋招投递记录_${dateStamp()}.json`,'application/json');
+  toast('已导出 JSON','success');
+}
+function exportCSV(){
+  if(!records.length){toast('暂无数据可导出','error');return;}
+  const head=['公司','公司标签','岗位','当前状态','投递渠道','投递日期','面试时间','投递链接','内推人','内推码','工作地点','薪资范围','优先级','备注','创建时间','最后更新'];
+  const rows=records.map(r=>[r.company,recordCompanyGroup(r),r.position,r.status,r.channel,r.applyDate,r.interviewTime?r.interviewTime.replace('T',' '):'',r.link,r.referrer,r.referralCode,r.location,r.salary,r.priority,r.note,r.createdAt,r.updatedAt]);
+  const cell=v=>{v=String(v??'');return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+  const csv='\uFEFF'+[head,...rows].map(row=>row.map(cell).join(',')).join('\r\n');
+  download(csv,`秋招投递记录_${dateStamp()}.csv`,'text/csv;charset=utf-8');
+  toast('已导出 CSV（Excel 可直接打开）','success');
+}
+
+/* ================= 事件 ================= */
+function bindEvents(){
+  $('#addBtn').onclick=()=>openRecordModal(null);
+  $('#emptyAddBtn').onclick=()=>openRecordModal(null);
+  $('#sampleBtn').onclick=()=>{replaceRecords(sampleData());renderAll();toast('已载入示例数据','success');};
+  $('#cloudBtn').onclick=openCloudModal;
+  $('#cloudModalClose').onclick=closeCloudModal;
+  $('#cloudDoneBtn').onclick=closeCloudModal;
+  $('#saveCloudConfigBtn').onclick=saveCloudConfig;
+  $('#cloudSignInBtn').onclick=()=>cloudAuth('signin');
+  $('#cloudSignUpBtn').onclick=()=>cloudAuth('signup');
+  $('#syncNowBtn').onclick=()=>syncCloud({showToast:true});
+  $('#cloudSignOutBtn').onclick=signOutCloud;
+  window.addEventListener('online',()=>{if(cloudUser)scheduleCloudSync();});
+  $('#modalClose').onclick=closeRecordModal;
+  $('#cancelBtn').onclick=closeRecordModal;
+  $('#confirmCancel').onclick=closeConfirm;
+  $('#confirmOk').onclick=()=>{const cb=confirmCb;closeConfirm();cb&&cb();};
+
+  $('#searchInput').addEventListener('input',e=>{ui.search=e.target.value;renderChips();renderList();});
+  $('#channelSel').addEventListener('change',e=>{ui.channel=e.target.value;renderChips();renderList();});
+  $('#sortSel').addEventListener('change',e=>{ui.sort=e.target.value;renderList();});
+
+  const switchView=view=>{
+    ui.view=view;
+    $('#viewCompany').classList.toggle('on',view==='company');
+    $('#viewTable').classList.toggle('on',view==='table');
+    $('#viewTimeline').classList.toggle('on',view==='timeline');
+    renderList();
+  };
+  $('#viewCompany').onclick=()=>switchView('company');
+  $('#viewTable').onclick=()=>switchView('table');
+  $('#viewTimeline').onclick=()=>switchView('timeline');
+  $('#collapseCompaniesBtn').onclick=()=>{
+    expandedCompanies.clear();
+    renderList();
+    toast('已收起所有公司标签','success');
+  };
+
+  $('#exportBtn').onclick=e=>{e.stopPropagation();$('#exportMenu').hidden=!$('#exportMenu').hidden;};
+
+  $('#importBtn').onclick=()=>$('#fileInput').click();
+  $('#fileInput').addEventListener('change',e=>{
+    const f=e.target.files[0];if(!f)return;
+    const rd=new FileReader();
+    rd.onload=()=>{
+      let arr;
+      try{arr=JSON.parse(rd.result);}catch(err){arr=null;}
+      if(!Array.isArray(arr)){toast('导入失败：文件不是有效的 JSON','error');return;}
+      askConfirm({
+        emoji:'📥',title:'导入数据',
+        desc:`检测到 ${arr.length} 条记录。导入将覆盖当前全部数据，确定继续吗？`,
+        okText:'覆盖导入',
+        onOk(){replaceRecords(arr);renderAll();toast(`成功导入 ${records.length} 条记录`,'success');}
+      });
+    };
+    rd.readAsText(f);
+    e.target.value='';
+  });
+
+  $('#recordForm').addEventListener('submit',e=>{
+    e.preventDefault();
+    const v=id=>$('#'+id).value.trim();
+    const company=v('f-company'),position=v('f-position');
+    let ok=true;
+    [['f-company',company],['f-position',position]].forEach(([fid,val])=>{
+      $('#'+fid).classList.toggle('err',!val);
+      if(!val)ok=false;
+    });
+    if(!ok){toast('请填写公司和岗位','error');return;}
+    const data={
+      company,position,
+      companyGroup:v('f-company-group'),
+      link:v('f-link'),
+      channel:$('#f-channel').value,
+      applyDate:$('#f-date').value,
+      status:$('#f-status').value,
+      interviewTime:$('#f-interview').value,
+      referrer:v('f-referrer'),
+      referralCode:v('f-code'),
+      location:v('f-location'),
+      salary:v('f-salary'),
+      priority:$('#f-priority').value,
+      note:$('#f-note').value.trim(),
+    };
+    const now=new Date().toISOString();
+    if(editingId){
+      const r=records.find(x=>x.id===editingId);
+      const changed=r&&r.status!==data.status;
+      if(r){Object.assign(r,data,{updatedAt:now});if(changed)r.statusUpdatedAt=now;}
+      toast('已保存修改','success');
+    }else{
+      records.unshift(normalizeRecord({id:uid(),...data,createdAt:now,updatedAt:now,statusUpdatedAt:now}));
+      toast('已添加投递记录，祝顺利 🍀','success');
+    }
+    persist();closeRecordModal();renderAll();
+  });
+
+  /* 全局点击分发 */
+  document.addEventListener('click',e=>{
+    if(!e.target.closest('.menu-wrap'))$('#exportMenu').hidden=true;
+    const chip=e.target.closest('.chip[data-status]');
+    if(chip){ui.status=chip.dataset.status;renderChips();renderList();return;}
+    const exp=e.target.closest('[data-export]');
+    if(exp){exp.dataset.export==='json'?exportJSON():exportCSV();$('#exportMenu').hidden=true;return;}
+    const el=e.target.closest('[data-action]');
+    if(!el)return;
+    const {action,id}=el.dataset;
+    const r=records.find(x=>x.id===id);
+    switch(action){
+      case 'company-toggle':{
+        const company=decodeURIComponent(el.dataset.company||'');
+        expandedCompanies.has(company)?expandedCompanies.delete(company):expandedCompanies.add(company);
+        renderList();break;
+      }
+      case 'copy-link':
+        if(r)copyText(r.link,'投递链接');break;
+      case 'copy-code':
+        if(r)copyText(r.referralCode,'内推码');break;
+      case 'edit':
+        openRecordModal(id);break;
+      case 'del':
+        if(!r)return;
+        askConfirm({
+          emoji:'🗑️',title:'删除这条记录？',
+          desc:`「${r.company} · ${r.position}」将被永久删除，此操作不可撤销。`,
+          okText:'删除',
+          onOk(){
+            markCloudDelete(id);
+            records=records.filter(x=>x.id!==id);
+            persist();renderAll();toast('已删除','success');
+          }
+        });
+        break;
+      case 'clear-filter':
+        ui.search='';ui.status='全部';ui.channel='全部';
+        $('#searchInput').value='';
+        renderChannelFilter();renderChips();renderList();break;
+    }
+  });
+
+  /* 表格内直接改状态 */
+  document.addEventListener('change',e=>{
+    const sel=e.target.closest('select[data-action="status"]');
+    if(!sel)return;
+    const r=records.find(x=>x.id===sel.dataset.id);
+    if(!r)return;
+    const now=new Date().toISOString();
+    if(sel.value!==r.status){
+      r.status=sel.value;
+      r.statusUpdatedAt=now;
+      r.updatedAt=now;
+      persist();
+      toast(`状态已更新为「${sel.value}」`,'success');
+    }
+    renderAll();
+  });
+
+  /* 遮罩点击 & Esc 关闭 */
+  ['recordModal','cloudModal','confirmModal'].forEach(id=>{
+    $('#'+id).addEventListener('click',e=>{
+      if(e.target.id===id){id==='recordModal'?closeRecordModal():id==='cloudModal'?closeCloudModal():closeConfirm();}
+    });
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){closeRecordModal();closeCloudModal();closeConfirm();$('#exportMenu').hidden=true;}
+  });
+}
+
+/* ================= 启动 ================= */
+function init(){
+  $('#f-channel').innerHTML=CHANNELS.map(c=>`<option>${c}</option>`).join('');
+  $('#f-status').innerHTML=STATUSES.map(s=>`<option>${s}</option>`).join('');
+  bindEvents();
+  renderAll();
+  initCloud();
+}
+init();
+</script>
+</body>
+</html>
