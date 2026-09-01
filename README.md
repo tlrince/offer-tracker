@@ -33,6 +33,8 @@ python3 -m http.server 8765
 
 首次登录时，页面会询问是否把当前 origin 下的本地记录合并到云端。迁移完成后应立即导出一次 JSON 备份。
 
+现有 40 条记录属于 `file://` 页面自己的存储空间。应先在原来的 `~/Desktop/offer.html` 中配置并登录 Supabase完成迁移；或者先从原页面导出 JSON，再到 localhost / GitHub Pages 页面登录后导入。不同 origin 的 localStorage 不会自动共享。
+
 ## 4. 发布到 GitHub Pages
 
 先在 GitHub 创建一个**不含 README 的空仓库**，例如 `offer-tracker`，然后执行：
