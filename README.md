@@ -1,62 +1,64 @@
 # 秋招投递记录
 
+在线地址：<https://tlrince.github.io/offer-tracker/>
+
 静态前端部署在 GitHub Pages，数据通过 Supabase Auth + PostgreSQL + RLS 持久化。
 
-> GitHub Pages 只托管页面，不保存运行时数据。仓库中不包含个人投递记录、Supabase URL、anon key 或登录信息。
+> GitHub Pages 只托管页面，不保存运行时数据。仓库不包含个人投递记录、密码或 `service_role` 等服务端密钥。`offer-config.js` 中的 Project URL 与 publishable key 本来就是前端公开配置，安全边界由 RLS 提供。
 
-## 1. 创建 Supabase 数据库
+## 直接使用
 
-1. 在 <https://supabase.com/dashboard> 创建项目。
-2. 打开 **SQL Editor**，完整执行 [`offer-supabase-setup.sql`](./offer-supabase-setup.sql)。
-3. 在 **Project Settings → API** 找到：
-   - Project URL
-   - `anon` / `publishable` public key
-4. 绝不要把 `service_role` key 填入网页或提交到 GitHub。
+1. 打开在线地址。
+2. 点击右上角「云端未登录」。
+3. 使用至少 8 位密码注册并登录。
+4. 登录后，所有修改会写入 Supabase，并在当前浏览器保留离线缓存。
 
-## 2. 配置 Supabase Auth
+当前 Supabase 项目已经完成：
 
-在 **Authentication → URL Configuration** 中设置：
+- `applications` 表与索引
+- 用户级 Row Level Security（SELECT / INSERT / UPDATE / DELETE）
+- GitHub Pages Site URL 与 Redirect URL
+- 邮箱密码认证
 
-- Site URL：`https://<GitHub用户名>.github.io/<仓库名>/`
-- Redirect URLs：加入同一个 GitHub Pages URL
+## 迁移现有记录
 
-如果暂时使用邮箱密码登录，可以按需要决定是否开启 Confirm email。
+现有记录属于原 `file://` 页面自己的 localStorage，和 GitHub Pages 是两个不同的 origin，不能自动共享。
 
-## 3. 本地预览
+推荐迁移方式：
+
+1. 打开原来的 `~/Desktop/offer.html`。
+2. 点击右上角「云端未登录」并注册/登录。
+3. 首次登录时确认把现有本地记录合并到云端。
+4. 等待提示同步完成，再登录在线地址核对数量。
+5. 额外导出一次 JSON 作为独立备份。
+
+备用方式：先从原页面导出 JSON，再到在线页面登录并导入。
+
+## 本地预览
 
 ```bash
 cd ~/Desktop/offer-tracker
 python3 -m http.server 8765
 ```
 
-浏览器打开 <http://localhost:8765>，点击右上角「本地模式」，填写 Project URL 与 anon public key，然后注册或登录。
+然后打开 <http://localhost:8765>。
 
-首次登录时，页面会询问是否把当前 origin 下的本地记录合并到云端。迁移完成后应立即导出一次 JSON 备份。
+## 自建 Supabase 项目
 
-现有 40 条记录属于 `file://` 页面自己的存储空间。应先在原来的 `~/Desktop/offer.html` 中配置并登录 Supabase完成迁移；或者先从原页面导出 JSON，再到 localhost / GitHub Pages 页面登录后导入。不同 origin 的 localStorage 不会自动共享。
+如果需要 fork 并接入自己的 Supabase：
 
-## 4. 发布到 GitHub Pages
+1. 创建 Supabase 项目。
+2. 执行 [`offer-supabase-setup.sql`](./offer-supabase-setup.sql)，或运行 `supabase db push`。
+3. 修改 `offer-config.js` 中的 Project URL 与 publishable key。
+4. 在 Auth URL Configuration 中配置自己的站点和回调地址。
+5. 绝不要把 `service_role` 或 secret key 写入前端或提交到 GitHub。
 
-先在 GitHub 创建一个**不含 README 的空仓库**，例如 `offer-tracker`，然后执行：
-
-```bash
-cd ~/Desktop/offer-tracker
-git remote add origin https://github.com/<GitHub用户名>/offer-tracker.git
-git push -u origin main
-```
-
-在仓库 **Settings → Pages** 中选择：
-
-- Source：Deploy from a branch
-- Branch：`main`
-- Folder：`/ (root)`
-
-发布后登录同一个 Supabase 账号即可读取云端数据。
+Supabase 本地配置与迁移位于 `supabase/`。
 
 ## 同步规则
 
-- 本地修改先写入当前用户的浏览器缓存，再延迟同步到 Supabase。
+- 修改先写入当前用户的浏览器缓存，再延迟同步到 Supabase。
 - 同一记录按 `updated_at` 合并，更新时间较新的版本优先。
-- 删除操作使用本地待删除队列；断网恢复后继续同步。
+- 删除操作进入本地待删除队列，断网恢复后继续同步。
 - 每个用户使用独立缓存，数据库通过 RLS 只允许访问自己的数据。
 - JSON 导出仍然是独立于云服务的灾备手段。

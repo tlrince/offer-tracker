@@ -456,7 +456,7 @@ tbody tr:last-child td{border-bottom:none}
       <div id="cloudGuestPanel">
         <div class="form-grid">
           <div class="field"><label>登录邮箱</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="email"></div>
-          <div class="field"><label>密码</label><input id="cloudPassword" type="password" placeholder="至少 6 位" autocomplete="current-password"></div>
+          <div class="field"><label>密码</label><input id="cloudPassword" type="password" placeholder="至少 8 位" autocomplete="current-password"></div>
         </div>
         <div class="cloud-actions">
           <button type="button" class="btn btn-primary" id="cloudSignInBtn">登录并同步</button>
@@ -498,6 +498,7 @@ tbody tr:last-child td{border-bottom:none}
 <input type="file" id="fileInput" accept=".json,application/json" hidden>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="./offer-config.js"></script>
 <script src="./offer-cloud.js"></script>
 <script>
 /* ================= 常量 ================= */

@@ -18,8 +18,8 @@ function readRecordsFromKey(key){
   }catch(e){return [];}
 }
 function readCloudConfig(){
-  try{return JSON.parse(localStorage.getItem(CLOUD_CONFIG_KEY)||'null');}
-  catch(e){return null;}
+  try{return JSON.parse(localStorage.getItem(CLOUD_CONFIG_KEY)||'null')||window.OFFER_CLOUD_CONFIG||null;}
+  catch(e){return window.OFFER_CLOUD_CONFIG||null;}
 }
 function readPendingDeletes(){
   if(!cloudUser)return [];
@@ -121,7 +121,7 @@ async function cloudAuth(mode){
   if(!cloudClient){toast('请先保存 Supabase 配置','error');return;}
   const email=$('#cloudEmail').value.trim();
   const password=$('#cloudPassword').value;
-  if(!email||password.length<6){toast('请填写邮箱和至少 6 位密码','error');return;}
+  if(!email||password.length<8){toast('请填写邮箱和至少 8 位密码','error');return;}
   setCloudStatus('syncing',mode==='signup'?'正在注册…':'正在登录…');
   try{
     let result;
