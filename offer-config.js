@@ -1,1 +1,1 @@
-window.OFFER_CLOUD_CONFIG=Object.freeze({"url":"https://rpohcazujiixcaccolin.supabase.co","anonKey":"sb_publishable_WPWKmmin4SLdcb3utrH1sA_E3w_RHl1"});
+window.OFFER_FIREBASE_CONFIG=Object.freeze({"projectId":"tlrince-offer-tracker","appId":"1:581239106929:web:5a8f086e81fe1e22811ad0","storageBucket":"tlrince-offer-tracker.firebasestorage.app","apiKey":"AIzaSyADfubec5H-Wlaa2EoYi1MHp5BMtvuR8bU","authDomain":"tlrince-offer-tracker.firebaseapp.com","messagingSenderId":"581239106929","measurementId":"G-84W2NSK7C6","projectNumber":"581239106929","version":"2"});

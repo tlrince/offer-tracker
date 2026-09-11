@@ -263,7 +263,7 @@ tbody tr:last-child td{border-bottom:none}
       <span>秋招投递记录<small>把每一次投递都记清楚</small></span>
     </div>
     <div class="spacer"></div>
-    <button class="btn btn-ghost cloud-btn" id="cloudBtn" title="配置 Supabase 云同步">
+    <button class="btn btn-ghost cloud-btn" id="cloudBtn" title="Firebase 云同步">
       <span class="cloud-dot" id="cloudDot"></span>
       <span id="cloudBtnText">本地模式</span>
     </button>
@@ -426,33 +426,24 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<!-- 云同步配置 / 登录 -->
+<!-- Firebase 云同步登录 -->
 <div class="modal" id="cloudModal">
-  <div class="modal-card" style="max-width:680px">
+  <div class="modal-card" style="max-width:620px">
     <div class="modal-head">
-      <h3>Supabase 云同步</h3>
+      <h3>Firebase 云同步</h3>
       <button class="icon-btn" id="cloudModalClose" title="关闭">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
       </button>
     </div>
     <div class="modal-body">
       <div class="cloud-setup">
-        <b>GitHub Pages 只负责托管页面，Supabase 负责持久化数据。</b>
+        <b>当前使用 Firebase Spark 免费计划。</b>
         <ol>
-          <li>创建 Supabase 项目，在 SQL Editor 执行同目录的 <code>offer-supabase-setup.sql</code></li>
-          <li>从 Project Settings → API 复制 Project URL 与 anon public key</li>
-          <li>保存配置后注册或登录；首次登录可把现有本地记录迁移到云端</li>
+          <li>GitHub Pages 负责托管页面，Cloud Firestore 负责持久化</li>
+          <li>每个账号的数据按 UID 隔离，其他用户无法读取</li>
+          <li>首次登录时可以把现有本地记录一次性迁移到云端</li>
         </ol>
       </div>
-      <div class="form-grid">
-        <div class="field full"><label>Supabase Project URL</label><input id="cloudUrl" type="url" placeholder="https://xxxx.supabase.co" autocomplete="off"></div>
-        <div class="field full"><label>anon public key</label><input id="cloudAnonKey" type="password" placeholder="只填写 anon key，绝不要填写 service_role key" autocomplete="off"></div>
-      </div>
-      <div class="cloud-actions">
-        <button type="button" class="btn btn-primary" id="saveCloudConfigBtn">保存云端配置</button>
-        <a class="btn btn-ghost" href="./offer-supabase-setup.sql" target="_blank" rel="noopener">查看建表 SQL</a>
-      </div>
-      <div class="cloud-divider"></div>
       <div id="cloudGuestPanel">
         <div class="form-grid">
           <div class="field"><label>登录邮箱</label><input id="cloudEmail" type="email" placeholder="you@example.com" autocomplete="email"></div>
@@ -473,7 +464,7 @@ tbody tr:last-child td{border-bottom:none}
           <button type="button" class="btn btn-ghost" id="cloudSignOutBtn">退出云端账号</button>
         </div>
       </div>
-      <div class="cloud-security">anon key 可以出现在前端，但必须启用 RLS；service_role key 属于服务端机密，不能保存到本页面或 GitHub。</div>
+      <div class="cloud-security">Firebase Web 配置本来就是公开信息；真正的数据边界由 Firestore Security Rules 和登录 UID 提供。</div>
     </div>
     <div class="modal-foot"><button type="button" class="btn btn-ghost" id="cloudDoneBtn">完成</button></div>
   </div>
@@ -497,16 +488,16 @@ tbody tr:last-child td{border-bottom:none}
 <div id="toasts"></div>
 <input type="file" id="fileInput" accept=".json,application/json" hidden>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore-compat.js"></script>
 <script src="./offer-config.js"></script>
 <script src="./offer-cloud.js"></script>
 <script>
 /* ================= 常量 ================= */
 const LS_KEY='autumn_recruit_tracker_v1';
-const CLOUD_CONFIG_KEY='autumn_recruit_tracker_supabase_config';
-const CLOUD_CACHE_PREFIX='autumn_recruit_tracker_cloud_cache:';
-const CLOUD_DELETES_PREFIX='autumn_recruit_tracker_cloud_deletes:';
-const CLOUD_AUTH_STORAGE_KEY='autumn_recruit_tracker_supabase_auth';
+const CLOUD_CACHE_PREFIX='autumn_recruit_tracker_firebase_cache:';
+const CLOUD_DELETES_PREFIX='autumn_recruit_tracker_firebase_deletes:';
 const STATUSES=['待投递','已投递','筛选中','测评中','笔试','一面','二面','三面','四面','五面','HR面','Offer','泡池','挂掉'];
 const TERMINAL=['Offer','挂掉'];
 const PROCESSING=['已投递','筛选中','测评中','笔试','一面','二面','三面','四面','五面','HR面'];
@@ -948,7 +939,6 @@ function bindEvents(){
   $('#cloudBtn').onclick=openCloudModal;
   $('#cloudModalClose').onclick=closeCloudModal;
   $('#cloudDoneBtn').onclick=closeCloudModal;
-  $('#saveCloudConfigBtn').onclick=saveCloudConfig;
   $('#cloudSignInBtn').onclick=()=>cloudAuth('signin');
   $('#cloudSignUpBtn').onclick=()=>cloudAuth('signup');
   $('#syncNowBtn').onclick=()=>syncCloud({showToast:true});

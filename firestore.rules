@@ -1,0 +1,36 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedInAs(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    function validApplication(appId) {
+      return request.resource.data.keys().hasOnly([
+          'id', 'company', 'companyGroup', 'position', 'link', 'channel',
+          'applyDate', 'status', 'interviewTime', 'referrer', 'referralCode',
+          'location', 'salary', 'priority', 'note', 'createdAt', 'updatedAt',
+          'statusUpdatedAt'
+        ])
+        && request.resource.data.id == appId
+        && request.resource.data.company is string
+        && request.resource.data.company.size() > 0
+        && request.resource.data.company.size() <= 80
+        && request.resource.data.position is string
+        && request.resource.data.position.size() > 0
+        && request.resource.data.position.size() <= 120
+        && request.resource.data.status is string
+        && request.resource.data.updatedAt is string;
+    }
+
+    match /users/{userId}/applications/{appId} {
+      allow read, delete: if signedInAs(userId);
+      allow create, update: if signedInAs(userId) && validApplication(appId);
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
