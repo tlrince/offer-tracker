@@ -10,14 +10,16 @@
 
 1. 打开在线地址。
 2. 点击右上角「云端未登录」。
-3. 使用至少 8 位密码注册或登录。
+3. 使用预设的个人账号登录；注册入口已关闭。
 4. 登录后，修改会同步到 Cloud Firestore，并在浏览器保留离线缓存。
+
+账号密码保存在本机 macOS Keychain 的 `Firebase offer-tracker owner` 条目中，不写入仓库。
 
 Firebase 项目已经完成：
 
 - 香港区域的 Firestore Native 数据库（Spark 免费层）
-- 用户级 Firestore Security Rules
-- Firebase Web App 与 GitHub Pages 配置
+- 锁定预设 Owner UID 的 Firestore Security Rules
+- Firebase Web App、邮箱密码登录与 GitHub Pages 配置
 - 本地缓存、较新版本合并和离线删除队列
 
 ## 迁移现有记录
@@ -27,7 +29,7 @@ Firebase 项目已经完成：
 推荐迁移方式：
 
 1. 打开原来的 `~/Desktop/offer.html`。
-2. 点击右上角「云端未登录」并注册/登录。
+2. 点击右上角「云端未登录」，使用预设个人账号登录。
 3. 首次登录时确认把现有本地记录合并到云端。
 4. 等待显示“同步完成”，再登录在线地址核对数量。
 5. 额外导出一次 JSON 作为独立备份。
@@ -61,5 +63,5 @@ firebase deploy --only firestore:rules,firestore:indexes
 - 修改先写入当前用户的浏览器缓存，再延迟同步到 Firestore。
 - 同一记录按 `updatedAt` 合并，更新时间较新的版本优先。
 - 删除操作进入本地待删除队列，断网恢复后继续同步。
-- 数据存储在 `users/{uid}/applications/{recordId}`，规则要求登录 UID 与路径 UID 一致。
+- 数据存储在 `users/{uid}/applications/{recordId}`，规则同时校验路径 UID 和预设 Owner UID。
 - JSON 导出仍然是独立于云服务的灾备手段。

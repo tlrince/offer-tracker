@@ -440,7 +440,7 @@ tbody tr:last-child td{border-bottom:none}
         <b>当前使用 Firebase Spark 免费计划。</b>
         <ol>
           <li>GitHub Pages 负责托管页面，Cloud Firestore 负责持久化</li>
-          <li>每个账号的数据按 UID 隔离，其他用户无法读取</li>
+          <li>当前为个人专用模式，只有预设账号 UID 可以读写数据</li>
           <li>首次登录时可以把现有本地记录一次性迁移到云端</li>
         </ol>
       </div>
@@ -451,7 +451,7 @@ tbody tr:last-child td{border-bottom:none}
         </div>
         <div class="cloud-actions">
           <button type="button" class="btn btn-primary" id="cloudSignInBtn">登录并同步</button>
-          <button type="button" class="btn btn-ghost" id="cloudSignUpBtn">注册账号</button>
+          <button type="button" class="btn btn-ghost" id="cloudSignUpBtn" hidden>注册账号</button>
         </div>
       </div>
       <div id="cloudUserPanel" hidden>
